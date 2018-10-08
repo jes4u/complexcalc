@@ -22,7 +22,17 @@ class Calculator {
             total += num;
         }
         return total;
-        
+    }
+    
+    func add(lhs: (Int, Int), rhs: (Int, Int)) -> (Int, Int) {
+        return (lhs.0 + rhs.0, lhs.1 + rhs.1)
+    }
+    
+    func add(lhs: [String: Int], rhs: [String: Int]) -> [String: Int] {
+        var ret = [String: Int]();
+        ret["x"] = lhs["x"]! + rhs["x"]!;
+        ret["y"] = lhs["y"]! + rhs["y"]!;
+        return ret;
     }
     
     //Subtract
@@ -36,7 +46,17 @@ class Calculator {
             total -= num;
         }
         return total;
-        
+    }
+    
+    func subtract(lhs: (Int, Int), rhs: (Int, Int)) -> (Int, Int) {
+        return (lhs.0 - rhs.0, lhs.1 - rhs.1)
+    }
+    
+    func subtract(lhs: [String: Int], rhs: [String: Int]) -> [String: Int] {
+        var ret = [String: Int]();
+        ret["x"] = lhs["x"]! - rhs["x"]!;
+        ret["y"] = lhs["y"]! - rhs["y"]!;
+        return ret;
     }
     
     //Multiply
@@ -45,9 +65,9 @@ class Calculator {
     }
     
     func multiply(_ list: Array<Int> ) -> Int {
-        var total = 0
+        var total = 1
         for num in list {
-            total -= num;
+            total *= num;
         }
         return total;
         
@@ -85,9 +105,10 @@ class Calculator {
     }
     
     func mathOp(args: Array<Int>, beg: Int, op: (Int, Int) -> Int) -> Int {
-        var total = 0;
-        for index in 0...args.count {
-            total += op(args[index], beg);
+        var total = beg;
+        
+        for index in 0..<args.count {
+            total = op(args[index], total);
         }
         
         return total;
